@@ -14,42 +14,19 @@ const countModifier = (count = 0, action) => {
   }
 };
 
+number.innerText = 0;
 const countStore = createStore(countModifier);
-number.innerText = countStore.getState();
-
-const updateText = () => {
+const onChange = () => {
   number.innerText = countStore.getState();
 };
+countStore.subscribe(onChange);
+
 const handleAdd = () => {
   countStore.dispatch({ type: "ADD" });
-  updateText();
 };
 const handleMinus = () => {
   countStore.dispatch({ type: "MINUS" });
-  updateText();
 };
 
 add.addEventListener("click", handleAdd);
 minus.addEventListener("click", handleMinus);
-// console.log(countStore.getState());
-
-// let count = 0;
-// number.innerText = count;
-
-// const updateText = () => {
-//   number.innerText = count;
-// };
-
-// const handleAdd = () => {
-//   console.log("add");
-//   count = count + 1;
-//   updateText();
-// };
-// const handleMinus = () => {
-//   console.log("minus");
-//   count = count - 1;
-//   updateText();
-// };
-
-// add.addEventListener("click", handleAdd);
-// minus.addEventListener("click", handleMinus);
