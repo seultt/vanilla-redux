@@ -4,12 +4,15 @@ const form = document.querySelector("form");
 const input = document.querySelector("input");
 const ul = document.querySelector("ul");
 
-const CREATE_TO_DO = "CREATE_TO_DO";
+const ADD_TODO = "ADD_TODO";
+const DELETE_TO_DO = "DELETE_TO_DO";
 const toDoModifier = (toDo = [], action) => {
   console.log(action);
   switch (action.type) {
-    case CREATE_TO_DO:
-      return [...toDo, action.value];
+    case ADD_TODO:
+      return [...toDo, { id: new Date().getTime(), text: action.value }];
+    case DELETE_TO_DO:
+      return toDo.filter((item) => item.id !== action.id);
 
     default:
       return toDo;
@@ -18,9 +21,15 @@ const toDoModifier = (toDo = [], action) => {
 
 const toDoStore = createStore(toDoModifier);
 const createToDo = () => {
-  const li = document.createElement("li");
-  li.innerText = toDoStore.getState();
-  ul.appendChild(li);
+  ul.innerHTML = "";
+  toDoStore.getState().forEach((element) => {
+    const li = document.createElement("li");
+    li.addEventListener("click", () =>
+      toDoStore.dispatch({ type: DELETE_TO_DO, id: element.id })
+    );
+    li.innerText = element.text;
+    ul.appendChild(li);
+  });
 };
 toDoStore.subscribe(createToDo);
 
@@ -28,7 +37,10 @@ const onSubmit = (e) => {
   e.preventDefault();
   const toDo = input.value;
   input.value = "";
-  toDoStore.dispatch({ type: CREATE_TO_DO, value: toDo });
+  toDoStore.dispatch({
+    type: ADD_TODO,
+    value: toDo,
+  });
   // createToDo(toDo);
 };
 
