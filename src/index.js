@@ -9,7 +9,7 @@ const DELETE_TO_DO = "DELETE_TO_DO";
 const toDoModifier = (toDo = [], action) => {
   switch (action.type) {
     case ADD_TODO:
-      return [...toDo, { id: new Date().getTime(), text: action.value }];
+      return [{ id: new Date().getTime(), text: action.value }, ...toDo];
     case DELETE_TO_DO:
       return toDo.filter((item) => item.id !== action.id);
 
@@ -34,8 +34,11 @@ const paintToDos = () => {
   ul.innerHTML = "";
   toDoStore.getState().forEach((element) => {
     const li = document.createElement("li");
-    li.addEventListener("click", () => deleteToDo(element.id));
+    const button = document.createElement("button");
+    button.innerHTML = "delete";
+    button.addEventListener("click", () => deleteToDo(element.id));
     li.innerText = element.text;
+    li.appendChild(button);
     ul.appendChild(li);
   });
 };
