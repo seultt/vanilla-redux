@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { connect } from "react-redux";
 
-function Home() {
+function Home({ toDos }) {
   const [text, setText] = useState("");
   const [toDo, setToDo] = useState([]);
 
@@ -21,15 +22,19 @@ function Home() {
         <input type="submit" />
       </form>
       <ul>
-        {toDo.map((item) => (
+        {JSON.stringify(toDos)}
+        {/* {toDos.map((item) => (
           <li key={item.id}>
             {item.text}
             <button>delete</button>
           </li>
-        ))}
+        ))} */}
       </ul>
     </>
   );
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+  return { toDos: state };
+};
+export default connect(mapStateToProps)(Home);
