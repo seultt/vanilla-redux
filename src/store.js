@@ -1,4 +1,5 @@
 import { createStore } from "redux";
+import { getStorage, setStorage } from "./storage";
 
 const ADD = "ADD";
 const DELETE = "DELETE";
@@ -16,7 +17,9 @@ const deleteToDo = (id) => {
   };
 };
 
-const reducer = (state = [], action) => {
+const initialState = getStorage() || [];
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD:
       return [{ text: action.text, id: Date.now() }, ...state];
@@ -28,6 +31,11 @@ const reducer = (state = [], action) => {
 };
 
 const store = createStore(reducer);
+
+const changeReducer = () => {
+  setStorage("data", store.getState());
+};
+store.subscribe(changeReducer);
 
 export const actionCreators = {
   addToDo,
