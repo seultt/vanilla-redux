@@ -1,30 +1,27 @@
-import { legacy_createStore } from "redux";
 import { getStorage, setStorage } from "./storage";
-import { configureStore, createAction, createReducer } from "@reduxjs/toolkit";
-
-const addToDo = createAction("ADD");
-const deleteToDo = createAction("DELETE");
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 const initialState = getStorage() || [];
 
-const reducer = createReducer(initialState, {
-  [addToDo]: (state, action) => {
-    state.push({ text: action.payload, id: Date.now() });
+const toDos = createSlice({
+  name: "toDosReducer",
+  initialState,
+  reducers: {
+    add: (state, action) => {
+      state.push({ text: action.payload, id: Date.now() });
+    },
+    remove: (state, action) =>
+      state.filter((item) => item.id !== action.payload),
   },
-  [deleteToDo]: (state, action) =>
-    state.filter((item) => item.id !== action.payload),
 });
 
-const store = configureStore({ reducer });
+const store = configureStore({ reducer: toDos.reducer });
 
 const changeReducer = () => {
   setStorage("data", store.getState());
 };
 store.subscribe(changeReducer);
 
-export const actionCreators = {
-  addToDo,
-  deleteToDo,
-};
+export const { add, remove } = toDos.actions;
 
 export default store;
