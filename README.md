@@ -9,6 +9,8 @@ Javascript application 들의 상태를 관리하는 방법
 
 ## Vanilla Redux
 
+> [리덕스 공식문서](https://redux.js.org/)
+
 - createStore: store 생성
 - store: data 저장소
   - getState: 현재 상태 트리 반환
@@ -18,8 +20,6 @@ Javascript application 들의 상태를 관리하는 방법
 - reducer: 새 상태 반환 함수
 
   - (state, action) => newState
-
-> [리덕스 공식문서](https://redux.js.org/)
 
 ## React Redux
 
