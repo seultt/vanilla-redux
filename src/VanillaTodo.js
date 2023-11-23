@@ -1,4 +1,4 @@
-import { createStore } from "redux";
+import { legacy_createStore } from "redux";
 
 const form = document.querySelector("form");
 const input = document.querySelector("input");
@@ -30,7 +30,7 @@ const toDoModifier = (toDo = [], action) => {
   }
 };
 
-const store = createStore(toDoModifier);
+const store = legacy_createStore(toDoModifier);
 
 const dispatchAddToDo = (value) => {
   store.dispatch(addToDo(value));

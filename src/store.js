@@ -1,4 +1,4 @@
-import { createStore } from "redux";
+import { legacy_createStore } from "redux";
 import { getStorage, setStorage } from "./storage";
 
 const ADD = "ADD";
@@ -30,7 +30,7 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-const store = createStore(reducer);
+const store = legacy_createStore(reducer);
 
 const changeReducer = () => {
   setStorage("data", store.getState());

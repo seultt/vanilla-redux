@@ -1,4 +1,4 @@
-import { createStore } from "redux";
+import { legacy_createStore } from "redux";
 
 const add = document.getElementById("add");
 const minus = document.getElementById("minus");
@@ -19,7 +19,7 @@ const countModifier = (count = 0, action) => {
 };
 
 number.innerText = 0;
-const countStore = createStore(countModifier);
+const countStore = legacy_createStore(countModifier);
 const onChange = () => {
   number.innerText = countStore.getState();
 };
