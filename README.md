@@ -1,13 +1,14 @@
 # Redux
 
 Learning Vanilla-Redux and React-Redux
-Javascript application 들의 상태를 관리하는 방법
 
 강의: [노마드코더-초보자를 위한 리덕스 101](https://nomadcoders.co/redux-for-beginners/lobby)
 
 목적: 리덕스 기본기 다시 공부
 
 ## Vanilla Redux
+
+Javascript application 들의 상태를 관리
 
 > [리덕스 공식문서](https://redux.js.org/)
 
@@ -27,7 +28,8 @@ store 를 subscribe 하고 React 에서 rerender 하기 위해 사용하는 Redu
 
 ## Redux Toolkit
 
-- Redux boilerplate
+Redux boilerplate
+
 - Redux 소스코드 양을 줄여 준다.
 - Redux Toolkit 에 immer.js 가 작동이 되어 새로운 state 를 반환하거나 현재 state 에 mutate 가 가능하다.
 - createSlice 를 사용하여 모두(reducer, action...) 캡슐화 해준다.
