@@ -1,13 +1,13 @@
 import React from "react";
 
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-function Detail({ toDos }) {
+function Detail() {
   const { id } = useParams();
-  console.log(id);
-  console.log(toDos);
-  const toDo = toDos.find((item) => item.id === parseInt(id));
+  const toDo = useSelector((state) =>
+    state.find((item) => item.id === parseInt(id))
+  );
 
   return (
     <>
@@ -17,14 +17,4 @@ function Detail({ toDos }) {
   );
 }
 
-const mapStateToProps = (state, _ownProps) => {
-  /**
-   * [ISSUE]: react-router-dom version 문제
-   * ownProps에 match.params 값이 넘어 오지 않음
-   * useParams 를 사용하여 구현
-   */
-  return {
-    toDos: state,
-  };
-};
-export default connect(mapStateToProps)(Detail);
+export default Detail;
